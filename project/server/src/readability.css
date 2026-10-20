@@ -1,0 +1,28 @@
+/* Readable dashboard type scale */
+.nav-item { font-size: 13px; }
+.workspace-switcher span { font-size: 12px; }
+.workspace-switcher small { font-size: 11px; }
+.nav-label { font-size: 10px; }
+.simulation-card p, .simulation-card button { font-size: 11px; }
+.breadcrumb, .system-state { font-size: 13px; }
+.page-intro h1 { font-size: 32px; }
+.page-intro p { font-size: 14px; line-height: 1.55; }
+.eyebrow { font-size: 11px; }
+.button, .select-button, .filter-button, .text-button { font-size: 12px; }
+.mode-banner strong, .rule-alert strong, .connector-callout strong { font-size: 13px; }
+.mode-banner span, .rule-alert span, .connector-callout span { font-size: 12px; line-height: 1.45; }
+.metric-label { font-size: 12px; }
+.metric-value { font-size: 27px; }
+.metric-change { font-size: 11px; }
+.panel h2 { font-size: 17px; }
+.page-wrap { line-height: 1.5; }
+.sidebar, .main-content { letter-spacing: 0; }
+.panel-header p { font-size: 12px; }
+th { font-size: 11px; }
+td, .destination-cell strong { font-size: 12px; }
+.platform-tag, .status-pill, .score { font-size: 11px; }
+.quick-card strong, .job-main strong, .connector-card-top strong, .rule-card strong { font-size: 13px; }
+.quick-card small, .job-main span, .rule-card p, .connector-card p { font-size: 11px; }
+.catalogue-summary span, .catalogue-search input, .job-stats, .job-label, .job-progress small, .job-row time, .policy-row, .policy-row small, .cert-row small, .cert-row time, .activity-row strong, .activity-row small { font-size: 11px; }
+.health-list div, .health-footer, .chart-legend, .chart-x, .chart-y { font-size: 11px; }
+@media (max-width: 760px) { .page-intro h1 { font-size: 28px; } }

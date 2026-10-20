@@ -1,0 +1,12 @@
+key: discourse
+version: 1.0.0
+tier: core
+auth: api_key
+surfaces:
+  - type: forum
+    content_types: [text, image, video, link]
+    spec: {title_max_chars: 255, body_max_chars: 32000, links_allowed: true}
+rate_limits: {per_connection: {requests: 60, period_seconds: 60}}
+capabilities: [publish, status, delete, metrics]
+error_map: {422: PLATFORM_CONTENT_REJECTED, 429: PLATFORM_RATE_LIMIT, 401: CONNECTION_AUTH_EXPIRED}
+instance_param: base_url

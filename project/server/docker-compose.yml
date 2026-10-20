@@ -1,0 +1,45 @@
+services:
+  api:
+    build: .
+    environment:
+      API_PORT: 8787
+      DATABASE_URL: postgresql://reachline:reachline@postgres:5432/reachline
+      SIMULATION_MODE: 'true'
+    ports: ['8787:8787']
+    depends_on:
+      postgres: { condition: service_healthy }
+      minio: { condition: service_healthy }
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:8787/health']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: reachline
+      POSTGRES_USER: reachline
+      POSTGRES_PASSWORD: reachline
+    ports: ['5432:5432']
+    volumes: [reachline-postgres:/var/lib/postgresql/data]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U reachline -d reachline']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  minio:
+    image: minio/minio:RELEASE.2024-06-13T22-53-53Z
+    command: server /data --console-address ':9001'
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports: ['9000:9000', '9001:9001']
+    volumes: [reachline-minio:/data]
+    healthcheck:
+      test: ['CMD', 'mc', 'ready', 'local']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  reachline-postgres:
+  reachline-minio:

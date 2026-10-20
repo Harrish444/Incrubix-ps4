@@ -1,0 +1,12 @@
+key: signed_webhook
+version: 1.0.0
+tier: core
+auth: hmac_sha256
+surfaces:
+  - type: webhook
+    content_types: [text, image, video, link]
+    spec: {title_max_chars: 255, body_max_chars: 32000, links_allowed: true}
+rate_limits: {per_connection: {requests: 120, period_seconds: 60}}
+capabilities: [publish, status, delete]
+error_map: {401: CONNECTION_AUTH_EXPIRED, 429: PLATFORM_RATE_LIMIT, 422: PLATFORM_CONTENT_REJECTED}
+instance_param: endpoint

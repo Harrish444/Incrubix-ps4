@@ -1,0 +1,12 @@
+key: lemmy
+version: 1.0.0
+tier: core
+auth: api_key
+surfaces:
+  - type: community
+    content_types: [text, image, link]
+    spec: {title_max_chars: 200, body_max_chars: 20000, links_allowed: true}
+rate_limits: {per_connection: {requests: 30, period_seconds: 60}}
+capabilities: [publish, status, delete]
+error_map: {400: PLATFORM_CONTENT_REJECTED, 429: PLATFORM_RATE_LIMIT, 401: CONNECTION_AUTH_EXPIRED}
+instance_param: base_url

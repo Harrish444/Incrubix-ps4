@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Reachline Distribution Ops API
+  version: 0.1.0
+  description: Simulation-first API contract under active implementation.
+servers:
+  - url: http://localhost:8787
+paths:
+  /health:
+    get:
+      summary: Liveness check
+      responses:
+        '200': {description: Service is running}
+  /ready:
+    get:
+      summary: Dependency readiness check
+      responses:
+        '200': {description: Dependencies are ready}
+        '503': {description: Dependency unavailable}
+  /api/v1/connectors:
+    get:
+      summary: List connector types
+      responses:
+        '200': {description: Connector list}
+  /api/v1/destinations:
+    get:
+      summary: List destinations
+      responses:
+        '200': {description: Destination list}
+  /api/v1/publish:
+    post:
+      summary: Queue a publishing job
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '202': {description: Job queued}
+        '409': {description: Idempotency conflict}
+  /api/v1/jobs/{job_id}:
+    get:
+      summary: Get job progress
+      parameters:
+        - {name: job_id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Job status}
+        '404': {description: Job not found}
